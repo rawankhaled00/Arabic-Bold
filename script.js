@@ -1,44 +1,21 @@
-body {
-  font-family: Arial, sans-serif;
-  direction: rtl;
-  background-color: #f7f7f7;
-  padding: 20px;
-}
+document.getElementById('boldButton').addEventListener('click', function() {
+  let input = document.getElementById('inputText').value;
+  let output = document.getElementById('outputText');
+  let copyBtn = document.getElementById('copyButton');
 
-.container {
-  max-width: 500px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+  if (input.trim() === '') {
+    output.textContent = "⚠️ من فضلك اكتب نص أولًا";
+    copyBtn.style.display = "none";
+  } else {
+    output.textContent = input;
+    output.style.fontWeight = 'bold'; // يخلي النص عريض
+    copyBtn.style.display = "inline-block";
+  }
+});
 
-textarea {
-  width: 100%;
-  height: 100px;
-  padding: 10px;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 18px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-#outputText {
-  margin-top: 20px;
-  font-weight: bold;
-  font-size: 20px;
-  word-break: break-word;
-}
+document.getElementById('copyButton').addEventListener('click', function() {
+  let textToCopy = document.getElementById('outputText').textContent;
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    alert("✅ تم نسخ النص!");
+  });
+});
